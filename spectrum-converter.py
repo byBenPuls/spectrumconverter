@@ -110,7 +110,7 @@ def CSVtoTXT (filename, LT):
             error_code = input("Для продолжения нажмите клавишу Enter.. ")
 
 #main
-print("v1.00")
+print("Spectrum Converter by Ben Puls [v1.00]")
 
 if len(sys.argv) == 1:
 	path = os.getcwd()
