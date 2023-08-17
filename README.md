@@ -5,7 +5,7 @@ This program created for convert XML or CSV spectrums to TXT spectrums.
 
 
 
-You can compile this filse in EXE program and use. [More about using](https://github.com/byBenPuls/spectrumconverter/releases/tag/spectrum)
+You can compile this file in EXE program and use. [More about using](https://github.com/byBenPuls/spectrumconverter/releases/tag/spectrum)
 ![guide](https://i.imgur.com/AyORLYg.gif)
 
 
