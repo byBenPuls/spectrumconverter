@@ -1,3 +1,5 @@
+import os
+
 import customtkinter
 from customtkinter import NORMAL
 from tkinter.filedialog import askopenfilename
@@ -5,7 +7,7 @@ from PIL import Image
 import webbrowser
 import GUI.src.convertation.main as convertation
 import GUI.src.temp.data as data
-
+import GUI.src.update.load as version
 
 class MainWindow(customtkinter.CTk):
     def __init__(self, **kwargs):
@@ -20,8 +22,8 @@ class MainWindow(customtkinter.CTk):
         y = (hs / 2) - (h / 2)
 
         self.geometry('%dx%d+%d+%d' % (w, h, x, y))
-        self.title('Spectrum Converter')
-        self.iconbitmap('../resources/icons/icon.ico')
+        self.title(f'Spectrum Converter v{version.load_update()}')
+        self.iconbitmap(f'{os.getcwd()}\\resources\icons\icon.ico')
         self.resizable(False, False)
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
@@ -41,7 +43,7 @@ class MainWindow(customtkinter.CTk):
                                                            anchor=customtkinter.CENTER)
         self.button_convertation.grid(column=0, row=1)
 
-        self.github_image = customtkinter.CTkImage(Image.open('../resources/icons/github-mark-white.png'),
+        self.github_image = customtkinter.CTkImage(Image.open(f'{os.getcwd()}\\resources/icons/github-mark-white.png'),
                                                    size=(30, 30))
 
         self.image_label = customtkinter.CTkButton(self, image=self.github_image, text='',
