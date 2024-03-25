@@ -24,7 +24,10 @@ class MainWindow(customtkinter.CTk):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        self.button = customtkinter.CTkButton(self, text='Нажмите, чтобы выбрать файл', command=self.button_callback)
+        self.button = customtkinter.CTkButton(self, text='Нажмите, чтобы выбрать файл',
+                                              command=self.button_callback,
+                                              anchor=customtkinter.CENTER
+                                              )
         self.button.grid(column=0, row=0)
         self.button1 = customtkinter.CTkButton(self, text='конвертировать',
                                                border_width=1,
@@ -32,7 +35,8 @@ class MainWindow(customtkinter.CTk):
                                                fg_color='green',
                                                hover_color='#005B00',
                                                command=self.converting,
-                                               height=40)
+                                               height=40,
+                                               anchor=customtkinter.CENTER)
         self.button1.grid(column=0, row=1)
 
         self.github_image = customtkinter.CTkImage(Image.open('../resources/icons/github-mark-white.png'),
@@ -42,7 +46,7 @@ class MainWindow(customtkinter.CTk):
                                                    fg_color='transparent', hover=False,
                                                    command=self.github_link,
                                                    width=30)
-        self.image_label.grid(column=3, row=3)
+        self.image_label.grid(column=2, row=2)
 
     def button_callback(self):
         try:
