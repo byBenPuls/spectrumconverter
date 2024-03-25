@@ -49,12 +49,11 @@ def file_to_txt(path_to_file: str, filetype):
         f.write("TLIVE={:.2f}\n".format(LT))
         f.write("TREAL={:.2f}\n".format(float(MT)))
         f.write("SPECTRTXT={}\n".format(N))
-        print(DP)
-        print(len(DP), N)
         for i in range(N):
             f.write(str(i + 1) + '\t' + str(int(DP[i])) + '\n')
 
         f.close()
+        return True
     else:
         try:
             print("Начато конвертирование...")
@@ -102,6 +101,7 @@ def file_to_txt(path_to_file: str, filetype):
                     f.write(str(i + 1) + '\t' + str(int(IMP[i])) + '\n')
 
             f.close()
+            return True
         except Exception as e:
             print("Произошла ошибка при конвертировании CSV спектра: ", e)
             error_code = input("Для продолжения нажмите клавишу Enter.. ")

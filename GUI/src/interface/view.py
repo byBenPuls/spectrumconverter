@@ -6,6 +6,7 @@ import webbrowser
 import GUI.src.convertation.main as convertation
 import GUI.src.temp.data as data
 
+
 class MainWindow(customtkinter.CTk):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -25,20 +26,20 @@ class MainWindow(customtkinter.CTk):
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        self.button = customtkinter.CTkButton(self, text='Нажмите, чтобы выбрать файл',
-                                              command=self.button_callback,
-                                              anchor=customtkinter.CENTER
-                                              )
-        self.button.grid(column=0, row=0)
-        self.button1 = customtkinter.CTkButton(self, text='конвертировать',
-                                               border_width=1,
-                                               state=customtkinter.DISABLED,
-                                               fg_color='green',
-                                               hover_color='#005B00',
-                                               command=self.converting,
-                                               height=40,
-                                               anchor=customtkinter.CENTER)
-        self.button1.grid(column=0, row=1)
+        self.button_select = customtkinter.CTkButton(self, text='Нажмите, чтобы выбрать файл',
+                                                     command=self.button_callback,
+                                                     anchor=customtkinter.CENTER
+                                                     )
+        self.button_select.grid(column=0, row=0)
+        self.button_convertation = customtkinter.CTkButton(self, text='конвертировать',
+                                                           border_width=1,
+                                                           state=customtkinter.DISABLED,
+                                                           fg_color='green',
+                                                           hover_color='#005B00',
+                                                           command=self.converting,
+                                                           height=40,
+                                                           anchor=customtkinter.CENTER)
+        self.button_convertation.grid(column=0, row=1)
 
         self.github_image = customtkinter.CTkImage(Image.open('../resources/icons/github-mark-white.png'),
                                                    size=(30, 30))
@@ -49,8 +50,18 @@ class MainWindow(customtkinter.CTk):
                                                    width=30)
         self.image_label.grid(column=2, row=2)
 
+    def default_buttons(self):
+        self.button_select.configure(text='Нажмите, чтобы выбрать файл')
+        self.button_convertation.configure(
+            text='конвертировать',
+            state=customtkinter.DISABLED,
+            fg_color='green',
+            hover_color='#005B00',
+        )
+
     def button_callback(self):
         try:
+            self.default_buttons()
             self.filename = askopenfilename(
                 filetypes=[('XML спектр', '*.xml'), ('CSV спектр', '*.csv')],
                 title='Выберите спектр в формате .xml или .csv'
@@ -59,8 +70,8 @@ class MainWindow(customtkinter.CTk):
                 path_to_file = self.filename
                 data.path_to_file = path_to_file
                 data.filetype = path_to_file.split('/')[-1].split('.')[-1]
-                self.button.configure(text=path_to_file.split('/')[-1])
-                self.button1.configure(state=NORMAL)
+                self.button_select.configure(text=path_to_file.split('/')[-1])
+                self.button_convertation.configure(state=NORMAL)
             else:
                 print('Файл не выбран')
         except Exception as e:
@@ -68,7 +79,11 @@ class MainWindow(customtkinter.CTk):
 
     def converting(self):
         print('Конвертация')
-        convertation.file_to_txt(data.path_to_file, filetype=data.filetype)
+        result = convertation.file_to_txt(data.path_to_file, filetype=data.filetype)
+        if result:
+            self.button_convertation.configure(fg_color='#896A05', text_color='white',
+                                               text='Успешно!',
+                                               state=customtkinter.DISABLED)
 
     def github_link(self):
         try:
