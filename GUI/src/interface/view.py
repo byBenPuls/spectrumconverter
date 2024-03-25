@@ -3,7 +3,8 @@ from customtkinter import NORMAL
 from tkinter.filedialog import askopenfilename
 from PIL import Image
 import webbrowser
-
+import GUI.src.convertation.main as convertation
+import GUI.src.temp.data as data
 
 class MainWindow(customtkinter.CTk):
     def __init__(self, **kwargs):
@@ -56,6 +57,8 @@ class MainWindow(customtkinter.CTk):
             )
             if self.filename:
                 path_to_file = self.filename
+                data.path_to_file = path_to_file
+                data.filetype = path_to_file.split('/')[-1].split('.')[-1]
                 self.button.configure(text=path_to_file.split('/')[-1])
                 self.button1.configure(state=NORMAL)
             else:
@@ -64,10 +67,8 @@ class MainWindow(customtkinter.CTk):
             print('Произошла ошибка:', str(e))
 
     def converting(self):
-        try:
-            print('Конвертация')
-        except Exception as e:
-            print('Произошла ошибка:', str(e))
+        print('Конвертация')
+        convertation.file_to_txt(data.path_to_file, filetype=data.filetype)
 
     def github_link(self):
         try:

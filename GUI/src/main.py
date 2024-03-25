@@ -6,7 +6,6 @@ import update.check
 import update.compare
 import update.load
 
-filepath = None
 VERSION = update.load.load_update()
 new_version = update.check.check_update()
 
