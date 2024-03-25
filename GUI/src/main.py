@@ -17,8 +17,8 @@ if __name__ == '__main__':
             pass
         else:
             update = tkinter.messagebox.askyesno(title='Spectrum Converter',
-                                                 message=f'Доступно новое обновление ({new_version}) программы.\n'
-                                                         f'Хотите установить обновление?')
+                                                 message=f'Доступно новое обновление (v{new_version}) программы.\n'
+                                                         'Хотите установить обновление?')
             if update:
                 webbrowser.open('https://github.com/byBenPuls/spectrumconverter/releases')
     except Exception as e:
